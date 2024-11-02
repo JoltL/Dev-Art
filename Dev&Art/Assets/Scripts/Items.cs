@@ -1,27 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Items : MonoBehaviour
 {
-    //public static Items Instance;
-    private void Awake()
-    {
-        //Singleton
-        //if (Instance != null)
-        //    Debug.LogWarning("There is another " + this.name + " instance in this scene");
-        //else
-        //    Instance = this;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
+    public int _malus;
 
-    }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
+        Destroy(gameObject, 5f);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<PlayerController>() != null)
+        {
+           
+            other.GetComponent<PlayerController>()._score += _malus;
+
+            if(other.GetComponent<PlayerController>()._score < 1)
+            {
+                other.GetComponent<PlayerController>()._score = 0;
+            }
+            other.GetComponent<PlayerController>().UpdateText();
+            Destroy(gameObject);
+
+
+        }
+    }
+
+
 }

@@ -9,25 +9,41 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float _time;
     [SerializeField] private float _targetTime;
 
+    [SerializeField] private float _sleepyTime;
+    [SerializeField] private float _targetSleepyTime;
+
 
     private void Update()
     {
+        _sleepyTime += Time.deltaTime;
+
+        if (_sleepyTime >= _targetSleepyTime)
+        {
+            UIManager.Instance._isStarting = false;
+            _targetSleepyTime = Random.Range(10f, 20f);
+            _sleepyTime = 0;
+        }
+
         if (UIManager.Instance._isStarting == true)
         {
 
-        _time += Time.deltaTime;
+            _time += Time.deltaTime;
 
-        if (_time >= _targetTime)
-        {
-            Spawn();
-            _targetTime = Random.Range(2f, 5f);
-            _time = 0;
-        }
+            if (_time >= _targetTime)
+            {
+                Spawn();
+                _targetTime = Random.Range(0f, 2f);
+                _time = 0;
+            }
         }
     }
     void Spawn()
     {
-        Vector3 posx = new Vector3(Random.Range(-3f, 3f), transform.position.y - .5f, transform.position.z);
-        Instantiate(_paper[Random.Range(0, _paper.Length)], posx, Quaternion.identity);
+
+        Vector3 posx = new Vector3(Random.Range(-3f, 3f), transform.position.y -0.5f, transform.position.z);
+        GameObject spawnedPaper = Instantiate(_paper[Random.Range(0, _paper.Length)], posx, Quaternion.identity);
+
+        int randomdrag = Random.Range(1, 4);
+        spawnedPaper.GetComponent<Rigidbody>().drag = randomdrag;
     }
 }

@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+
+    public static PlayerController Instance;
+
     [Header("Moves")]
     [SerializeField] private int _limit;
     private float _horizontal;
@@ -15,24 +19,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _gravityForce = -9.81f;
 
     [Header("Score")]
-    [SerializeField] private int _score;
+    public int _score;
     [SerializeField] private TMP_Text _scoreText;
 
-    [Header("Paper")]
-    [SerializeField] private int _idPaper;
-    [SerializeField] private List<GameObject> _papers = new List<GameObject>();
+    [Header("Coding")]
+    public bool _canCode;
+    Computer _computer;
 
-    [Header("ButtonPlay")]
+    public int _tapCount;
 
-    [SerializeField] private GameObject _button;
-
-
+  
     private void Start()
     {
+        _computer = FindObjectOfType<Computer>();
         _rb = GetComponent<Rigidbody>();
     }
     private void Update()
     {
+
+
         _horizontal = Input.GetAxis("Horizontal");
         float limitsx = Mathf.Clamp(transform.position.x, -_limit, _limit);
 
@@ -40,6 +45,8 @@ public class PlayerController : MonoBehaviour
 
         //Gravity
         _rb.AddForce(Vector3.down * _gravityForce);
+
+        _score = Mathf.Clamp(_score, 0, 100);
 
         GetPaper();
         Jump();
@@ -52,46 +59,47 @@ public class PlayerController : MonoBehaviour
             _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         }
 
+        //Vector3 Movement = 
+        //_jumpForce -= _gravityForce * Time.deltaTime;
+        //Movement += _jumpForce * Time.deltaTime;
+        //transform.position += Movement;
+
+
+
     }
 
     void GetPaper()
     {
-        if (_score > 0)
+        if (_score >= 2)
         {
-            _score = 0;
-
-            if (_papers.Count > 0)
-            {
-                GameObject paperspawned = _papers[Random.Range(0, _papers.Count - 1)];
-                paperspawned.transform.gameObject.SetActive(true);
-                _papers.Remove(paperspawned);
-
-            }
-            else
-            {
-                Debug.Log("listevide");
-                UIManager.Instance._isStarting = false;
-                _button.SetActive(true) ;
-
-            }
+            _canCode = true;
         }
+
+        if (_canCode && Input.GetButtonUp("Down") && _computer._closeToPC)
+        {
+            _tapCount++;
+
+
+            if (_tapCount >= 5)
+            {
+                _computer.Coding();
+                //A CHANGER 4
+                _score = _score - 2;
+                _canCode = false;
+
+                UpdateText();
+                _tapCount = 0;
+            }
+            
+        }
+
     }
     private void FixedUpdate()
     {
         _rb.velocity = new Vector3(_horizontal, 0, 0) * _speed;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.GetComponent<Items>())
-        {
-            Destroy(other.gameObject);
-            _score++;
-            UpdateText();
-        }
-    }
-
-    void UpdateText()
+    public void UpdateText()
     {
         _scoreText.text = _score.ToString();
     }

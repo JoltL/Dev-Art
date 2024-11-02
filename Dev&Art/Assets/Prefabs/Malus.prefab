@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a49fd4c909dd640b91657092c4fdc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _malus: 1
+  _malus: 0
 --- !u!1 &6087391702598001941
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,8 +130,9 @@ GameObject:
   m_Component:
   - component: {fileID: 529015459636615767}
   - component: {fileID: 8806834287350648896}
+  - component: {fileID: -5969019707766132226}
   m_Layer: 0
-  m_Name: Paper
+  m_Name: Malus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,8 +163,8 @@ Rigidbody:
   m_GameObject: {fileID: 6087391702598001941}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 4
-  m_AngularDrag: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -180,3 +181,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &-5969019707766132226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6087391702598001941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a49fd4c909dd640b91657092c4fdc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _malus: -1
