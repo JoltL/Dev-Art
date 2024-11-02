@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _gravityForce = -9.81f;
 
+    private bool _isGrounded;
+
     [Header("Score")]
     public int _score;
     [SerializeField] private TMP_Text _scoreText;
@@ -33,6 +35,8 @@ public class PlayerController : MonoBehaviour
     {
         _computer = FindObjectOfType<Computer>();
         _rb = GetComponent<Rigidbody>();
+
+        _isGrounded = false;
     }
     private void Update()
     {
@@ -46,18 +50,22 @@ public class PlayerController : MonoBehaviour
         //Gravity
         _rb.AddForce(Vector3.down * _gravityForce);
 
-        _score = Mathf.Clamp(_score, 0, 100);
+        if(_score < 0)
+        { _score = 0; }
 
         GetPaper();
-        Jump();
+
+        if (_isGrounded && Input.GetButtonDown("Jump"))
+        {
+            Jump();
+        }
     }
 
     void Jump()
     {
-        if (Input.GetButtonDown("Jump"))
-        {
-            _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
-        }
+       
+        _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+        _isGrounded = false;
 
         //Vector3 Movement = 
         //_jumpForce -= _gravityForce * Time.deltaTime;
@@ -102,5 +110,14 @@ public class PlayerController : MonoBehaviour
     public void UpdateText()
     {
         _scoreText.text = _score.ToString();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            print("collideGround");
+            _isGrounded = true;
+        }
     }
 }

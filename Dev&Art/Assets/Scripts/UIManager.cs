@@ -35,12 +35,13 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        _time += Time.deltaTime;
-        _chrono = (int)_time;
+        _targetTime -= Time.deltaTime;
+        _chrono = (int)_targetTime;
         _chronoText.text = _chrono.ToString();
 
-        if(_chrono >= _targetTime)
+        if(_targetTime <= 0)
         {
+            _targetTime = 0;
             UIManager.Instance._isStarting = false;
             _endPanel.SetActive(true);
             Time.timeScale = 0;
