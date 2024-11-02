@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     public int _score;
     [SerializeField] private TMP_Text _scoreText;
 
+    public int _maxScore;
+
     [Header("Coding")]
     public bool _canCode;
     Computer _computer;
@@ -58,6 +60,8 @@ public class PlayerController : MonoBehaviour
         if(_score < 0)
         { _score = 0; }
 
+        _score = Mathf.Clamp(_score, 0, _maxScore);
+
         GetPaper();
 
         if (_isGrounded && Input.GetButtonDown("Jump"))
@@ -81,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
     void GetPaper()
     {
-        if (_score >= 2)
+        if (_score >= _maxScore)
         {
             _canCode = true;
         }
@@ -91,18 +95,18 @@ public class PlayerController : MonoBehaviour
             _tapCount++;
 
 
-            if (_tapCount >= 5)
+            if (_tapCount >= _maxScore)
             {
                 _computer.Coding();
                 //A CHANGER 4
-                _score = _score - 2;
+                _score -= _maxScore;
                 _canCode = false;
 
-                UpdateText();
                 _tapCount = 0;
             }
             
         }
+                UpdateText();
 
     }
     private void FixedUpdate()

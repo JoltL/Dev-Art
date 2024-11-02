@@ -44,7 +44,7 @@ public class Computer : MonoBehaviour
         {
             _tapSlider.gameObject.SetActive(true);
 
-            _tapSlider.maxValue = 5;
+            _tapSlider.maxValue = other.GetComponent<PlayerController>()._maxScore;
             _tapSlider.value = other.GetComponent<PlayerController>()._tapCount;
 
             _closeToPC = true;
@@ -57,7 +57,7 @@ public class Computer : MonoBehaviour
         {
             _tapSlider.gameObject.SetActive(true);
 
-            _tapSlider.maxValue = 5;
+            _tapSlider.maxValue = other.GetComponent<PlayerController>()._maxScore;
             _tapSlider.value = other.GetComponent<PlayerController>()._tapCount;
 
             _closeToPC = true;
