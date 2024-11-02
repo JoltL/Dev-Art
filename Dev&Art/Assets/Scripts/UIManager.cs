@@ -61,6 +61,7 @@ public class UIManager : MonoBehaviour
             {
                 if (Input.GetButton("Down"))
                 {
+                    other.GetComponent<PlayerController>().SetCharacterState("Wakeup");
                     print("touch");
                     _isStarting = true;
                 }
@@ -75,7 +76,7 @@ public class UIManager : MonoBehaviour
 
             if (Input.GetButton("Down"))
             {
-
+                other.GetComponent<PlayerController>().SetCharacterState("Wakeup");
                 _isStarting = true;
             }
         }
