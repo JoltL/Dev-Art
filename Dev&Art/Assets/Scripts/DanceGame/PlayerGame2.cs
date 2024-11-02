@@ -28,6 +28,10 @@ public class PlayerGame2 : MonoBehaviour
 
     [SerializeField] private ScoreGame2 _scoreGame2;
 
+    [SerializeField] private GameObject[] _popmessage;
+
+    [SerializeField] private GameObject _endPanel;
+
     private void Start()
     {
        _scoreGame2 = GetComponent<ScoreGame2>();
@@ -37,7 +41,7 @@ public class PlayerGame2 : MonoBehaviour
 
     private void Update()
     {
-
+        _scoreGame2._score = Mathf.Clamp(_scoreGame2._score, 0, _sequenceNumber);
         //Si la touche cliquée est la même que la séquence; continuer la séquence
         if (Input.anyKeyDown)
         {
@@ -51,7 +55,8 @@ public class PlayerGame2 : MonoBehaviour
                     _currentIndex++;
                     Destroy(_instanciatedArrows[_currentIndex - 1]);
                     _scoreGame2._score++;
-
+                    _popmessage[0].SetActive(true);
+                    _popmessage[1].SetActive(false);
 
                     // Vérifier si la séquence est complète
                     if (_currentIndex >= _inputSequence.Count)
@@ -61,14 +66,18 @@ public class PlayerGame2 : MonoBehaviour
                         _instanciatedArrows.Clear();
                         RandomArrowsSequence();
                         ///!\END
+                        _endPanel.SetActive(true); 
                     }
                 }
                 else
                 {
                     PlayAnimationByName("Fail");
+                    _scoreGame2._score--;
+
                     //Mauvaise touche : Perd vie
                     //Difficulté Attaque des ennemis _________________________________________________________________________________________
-
+                    _popmessage[0].SetActive(false);
+                    _popmessage[1].SetActive(true);
 
                 }
             }
