@@ -1,10 +1,8 @@
-
 using Spine.Unity;
-using System.Collections;
-using System.Collections.Generic;
+
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -39,7 +37,6 @@ public class PlayerController : MonoBehaviour
     public string currentAnimation;
     public string previousState;
 
-    public bool isDying = false;
 
     private void Start()
     {
