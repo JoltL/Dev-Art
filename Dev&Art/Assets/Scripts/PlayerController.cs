@@ -34,9 +34,6 @@ public class PlayerController : MonoBehaviour
 
     public int _tapCount;
 
-    [Header("Hit")]
-
-    public GameObject _hitPanel;
 
     [Header("Spine")]
 

@@ -25,21 +25,11 @@ public class Items : MonoBehaviour
                 other.GetComponent<PlayerController>()._score = 0;
             }
 
-            other.GetComponent<PlayerController>()._hitPanel.SetActive(true);
-            StartCoroutine(Wakeuptime());
             other.GetComponent<PlayerController>().UpdateText();
             Destroy(gameObject);
 
 
         }
-    }
-
-    IEnumerator Wakeuptime()
-    {
-        _playerController._hitPanel.gameObject.SetActive(true);
-
-        yield return new WaitForSeconds(1.5f);
-        _playerController._hitPanel.gameObject.SetActive(false);
     }
 
 }

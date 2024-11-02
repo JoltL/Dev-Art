@@ -16,8 +16,11 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float _sleepyTime;
     [SerializeField] private float _targetSleepyTime;
 
-    bool _once;
-
+    private void Start()
+    {
+        _targetSleepyTime = Random.Range(10f, 20f);
+        _targetTime = Random.Range(0f, 2f);
+    }
 
     private void Update()
     {
@@ -37,36 +40,32 @@ public class Spawner : MonoBehaviour
         {
             _sleepPanel.gameObject.SetActive(false);
             _wakePanel.gameObject.SetActive(true);
-
-            //StartCoroutine(Wakeuptime());
  
 
             _time += Time.deltaTime;
 
             if (_time >= _targetTime)
             {
+
+                int randomspawn = Random.Range(0, 5);
+                for (int i = 0; i < randomspawn; i++)
+                {
                 Spawn();
                 _targetTime = Random.Range(0f, 2f);
+
+                }
                 _time = 0;
             }
         }
     }
 
-    IEnumerator Wakeuptime()
-    {
-        _once = true;
-        _wakePanel.gameObject.SetActive(true);
-
-        yield return new WaitForSeconds(1.5f);
-        _wakePanel.gameObject.SetActive(false);
-    }
     void Spawn()
     {
 
-        Vector3 posx = new Vector3(Random.Range(-3f, 3f), transform.position.y -0.5f, transform.position.z);
+        Vector3 posx = new Vector3(Random.Range(-8f,8f), transform.position.y -0.5f, transform.position.z);
         GameObject spawnedPaper = Instantiate(_paper[Random.Range(0, _paper.Length)], posx, Quaternion.identity);
 
-        int randomdrag = Random.Range(1, 4);
+        float randomdrag = Random.Range(0.1f, 4f);
         spawnedPaper.GetComponent<Rigidbody>().drag = randomdrag;
     }
 }
