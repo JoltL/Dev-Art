@@ -17,7 +17,9 @@ public class PlayerGame2 : MonoBehaviour
     };
 
     public int _sequenceNumber = 10; // Difficulté Nombre de flèches
+
     private List<KeyCode[]> _inputSequence = new List<KeyCode[]>();
+    private KeyCode _inputSequence2;
     private int _currentIndex = 0;
 
     [Header("Instantiate")]
@@ -43,53 +45,65 @@ public class PlayerGame2 : MonoBehaviour
 
     private bool _canPlay = true;
 
+    public float _rightTime = 1f;
+
+    Coroutine _timing;
+
     private void Start()
     {
         _scoreGame2 = GetComponent<ScoreGame2>();
         RandomArrowsSequence();
+
     }
 
     private void Update()
     {
-        if(_canPlay)
+        if (_canPlay)
         {
+            _scoreGame2._score = Mathf.Clamp(_scoreGame2._score, 0, _sequenceNumber);
 
-        _scoreGame2._score = Mathf.Clamp(_scoreGame2._score, 0, _sequenceNumber);
-        if (Input.anyKeyDown)
-        {
-            KeyCode pressedKey = GetPressedKey();
-            if (pressedKey != KeyCode.None)
+            if (Input.anyKeyDown)
             {
-                if (IsCorrectKey(pressedKey, _inputSequence[_currentIndex]))
+                KeyCode pressedKey = GetPressedKey();
+                if (pressedKey != KeyCode.None)
                 {
-                    TriggerAnimation(pressedKey);
-                    _currentIndex++;
-                    Destroy(_instanciatedArrows[_currentIndex - 1]);
-                    _scoreGame2._score++;
-                    _popmessage[0].SetActive(true);
-                    _popmessage[1].SetActive(false);
-
-                    if (_currentIndex >= _inputSequence.Count)
+                    if (IsCorrectKey(pressedKey, _inputSequence2))
                     {
-                        //END//
-                        _currentIndex = 0;
-                        _instanciatedArrows.Clear();
-                            _canPlay = false;
-                        //RandomArrowsSequence();
+                        StopCoroutine(_timing);
+                        TriggerAnimation(pressedKey);
+                        Destroy(_instanciatedArrows[_currentIndex]);
+                        _currentIndex++;
+                        _scoreGame2._score++;
+                        _popmessage[0].SetActive(true);
+                        _popmessage[1].SetActive(false);
 
-                        _eventSystem.SetSelectedGameObject(_endButton);
-                        _endPanel.SetActive(true);
+                        if(_scoreGame2._score >= _sequenceNumber) 
+                        {
+                            _canPlay = false;
+                            _endPanel.SetActive(true);
+                        }
+
+                        if (_currentIndex >= _inputSequence.Count)
+                        {
+                            //END//
+                            _currentIndex = 0;
+                            _instanciatedArrows.Clear();
+                            //_canPlay = false;
+                            RandomArrowsSequence();
+
+                            _eventSystem.SetSelectedGameObject(_endButton);
+                            //_endPanel.SetActive(true);
+                        }
+                    }
+                    else
+                    {
+                        PlayAnimationByName("Fail");
+                        _scoreGame2._score--;
+                        _popmessage[0].SetActive(false);
+                        _popmessage[1].SetActive(true);
                     }
                 }
-                else
-                {
-                    PlayAnimationByName("Fail");
-                    _scoreGame2._score--;
-                    _popmessage[0].SetActive(false);
-                    _popmessage[1].SetActive(true);
-                }
             }
-        }
         }
     }
 
@@ -98,24 +112,28 @@ public class PlayerGame2 : MonoBehaviour
         _inputSequence.Clear();
         float totalWidth = (_sequenceNumber - 1) * _gapInBetween;
 
-        for (int i = 0; i < _sequenceNumber; i++)
-        {
-            KeyCode[] randomKeys = _allDirections[Random.Range(0, _allDirections.Length)];
-            _inputSequence.Add(randomKeys);
+        KeyCode randomKeys = _allDirections[Random.Range(0, _allDirections.Length)][0];
+        _inputSequence2 = randomKeys;
 
-            GameObject arrows = Instantiate(_arrowPrefab, _placement);
-            RectTransform rectTransform = arrows.GetComponent<RectTransform>();
+        GameObject arrows = Instantiate(_arrowPrefab, _placement);
 
-            float xOffset = i * _gapInBetween - totalWidth;
-            rectTransform.anchoredPosition = new Vector2(xOffset, 0);
+        _instanciatedArrows.Add(arrows);
 
-            _instanciatedArrows.Add(arrows);
+        Image arrowImage = arrows.GetComponent<Image>();
+        arrowImage.sprite = GetSpriteForKey(randomKeys); // Utiliser le sprite associé à la direction
 
-            Image arrowImage = arrows.GetComponent<Image>();
-            arrowImage.sprite = GetSpriteForKey(randomKeys[0]); // Utiliser le sprite associé à la direction
-        }
+        _timing = StartCoroutine(StartTimer());
+        
     }
 
+    IEnumerator StartTimer()
+    {
+        yield return new WaitForSeconds(_rightTime);
+        RandomArrowsSequence();
+        Destroy(_instanciatedArrows[_currentIndex]);
+        _currentIndex++;
+    }
+    
     KeyCode GetPressedKey()
     {
         foreach (KeyCode[] keys in _allDirections)
@@ -131,14 +149,11 @@ public class PlayerGame2 : MonoBehaviour
         return KeyCode.None;
     }
 
-    bool IsCorrectKey(KeyCode pressedKey, KeyCode[] correctKeys)
+    bool IsCorrectKey(KeyCode pressedKey, KeyCode correctKeys)
     {
-        foreach (KeyCode key in correctKeys)
+        if (pressedKey == correctKeys)
         {
-            if (pressedKey == key)
-            {
-                return true;
-            }
+            return true;
         }
         return false;
     }
