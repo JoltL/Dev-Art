@@ -12,7 +12,7 @@ public class ScoreGame2 : MonoBehaviour
 
     private PlayerGame2 _game;
 
-    public TMP_Text _text;
+    public TMP_Text _scoreText;
 
     private void Start()
     {
@@ -24,7 +24,7 @@ public class ScoreGame2 : MonoBehaviour
     {
         Score();
 
-        _text.text = _score.ToString();
+        _scoreText.text = _score.ToString();
     }
     void Score()
     {

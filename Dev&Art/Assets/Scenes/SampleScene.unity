@@ -1947,12 +1947,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _limit: 8
-  _speed: 15
-  _jumpForce: 100
-  _gravityForce: 50
+  _speed: 7
+  _jumpForce: 6
   _score: 0
   _scoreText: {fileID: 249709615}
-  _maxScore: 2
+  _maxScore: 5
   _canCode: 0
   _tapCount: 0
   _skeletonAnimation: {fileID: 1048520038}
@@ -2536,7 +2535,7 @@ GameObject:
   - component: {fileID: 973519440}
   - component: {fileID: 973519439}
   - component: {fileID: 973519438}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GROUND
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -3728,7 +3727,7 @@ MonoBehaviour:
   _isStarting: 0
   _pausePanel: {fileID: 184836218}
   _chronoText: {fileID: 1795160369}
-  _targetTime: 180
+  _targetTime: 120
   _endPanel: {fileID: 1727290942}
 --- !u!1 &1473890286
 GameObject:
@@ -4002,7 +4001,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1601205100
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5364,10 +5363,10 @@ RectTransform:
   - {fileID: 1045468729}
   m_Father: {fileID: 662816319}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 10}
-  m_SizeDelta: {x: -1160, y: 330}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 242.1, y: -253.6}
+  m_SizeDelta: {x: 484.2, y: 253.6}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2092195645
 MonoBehaviour:
