@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [Header("Moves")]
     [SerializeField] private int _limit;
     private float _horizontal;
+    private float _vertical;
     private Rigidbody _rb;
     [SerializeField] private float _speed;
 
@@ -30,7 +31,11 @@ public class PlayerController : MonoBehaviour
 
     public int _tapCount;
 
-  
+    [Header("Hit")]
+
+    public GameObject _hitPanel;
+
+
     private void Start()
     {
         _computer = FindObjectOfType<Computer>();
@@ -59,20 +64,18 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
+        //!\ADD THIS
+            //_vertical -= _gravityForce * Time.deltaTime;
+
+        
     }
 
     void Jump()
     {
-       
+        //Vector applique une force
+        //!\REMOVE THIS
         _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         _isGrounded = false;
-
-        //Vector3 Movement = 
-        //_jumpForce -= _gravityForce * Time.deltaTime;
-        //Movement += _jumpForce * Time.deltaTime;
-        //transform.position += Movement;
-
-
 
     }
 
@@ -104,6 +107,8 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        //!\ADD THIS
+        //_rb.velocity = new Vector3(_horizontal, _vertical, 0) * _speed;
         _rb.velocity = new Vector3(_horizontal, 0, 0) * _speed;
     }
 

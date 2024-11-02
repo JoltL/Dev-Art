@@ -25,7 +25,15 @@ public class Chair : MonoBehaviour
         if(collision.gameObject.GetComponent<PlayerController>() != null)
         {
             collision.gameObject.GetComponent<PlayerController>()._score--;
+            StartCoroutine(Wakeuptime(collision.gameObject.GetComponent<PlayerController>()));
             Destroy(gameObject);
         }
+    }
+    IEnumerator Wakeuptime(PlayerController player)
+    {
+        player._hitPanel.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(1.5f);
+        player._hitPanel.gameObject.SetActive(false);
     }
 }

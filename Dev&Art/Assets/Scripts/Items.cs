@@ -7,6 +7,8 @@ public class Items : MonoBehaviour
 {
     public int _malus;
 
+    public PlayerController _playerController;
+
     private void Update()
     {
         Destroy(gameObject, 5f);
@@ -15,13 +17,16 @@ public class Items : MonoBehaviour
     {
         if (other.GetComponent<PlayerController>() != null)
         {
-           
+            _playerController = other.GetComponent<PlayerController>();
             other.GetComponent<PlayerController>()._score += _malus;
 
             if(other.GetComponent<PlayerController>()._score < 1)
             {
                 other.GetComponent<PlayerController>()._score = 0;
             }
+
+            other.GetComponent<PlayerController>()._hitPanel.SetActive(true);
+            StartCoroutine(Wakeuptime());
             other.GetComponent<PlayerController>().UpdateText();
             Destroy(gameObject);
 
@@ -29,5 +34,12 @@ public class Items : MonoBehaviour
         }
     }
 
+    IEnumerator Wakeuptime()
+    {
+        _playerController._hitPanel.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(1.5f);
+        _playerController._hitPanel.gameObject.SetActive(false);
+    }
 
 }
