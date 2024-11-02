@@ -21,7 +21,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text _chronoText;
 
     [SerializeField] private float _targetTime = 120f;
-    [SerializeField] private GameObject _endPanel;
+    [SerializeField] private GameObject[] _endPanel;
+
+    private Computer _computer;
 
 
     private void Awake()
@@ -33,21 +35,42 @@ public class UIManager : MonoBehaviour
             Instance = this;
     }
 
+    private void Start()
+    {
+        _computer = FindObjectOfType<Computer>();
+    }
     private void Update()
     {
 
-        if (_isStarting)
-        {
             _targetTime -= Time.deltaTime;
             _chrono = (int)_targetTime;
             _chronoText.text = _chrono.ToString();
-        }
+        
 
         if(_targetTime <= 0)
         {
             _targetTime = 0;
-            UIManager.Instance._isStarting = false;
-            _endPanel.SetActive(true);
+            _isStarting = false;
+            //FIN JEU PANEL DIFF
+
+            if(_computer._nbPapers <= 2)
+            {
+                _endPanel[0].SetActive(true);
+
+            }
+            else if (_computer._nbPapers > 2 && _computer._nbPapers <= 4)
+            {
+
+                _endPanel[1].SetActive(true);
+
+            } else if (_computer._nbPapers > 4 && _computer._nbPapers <= 6)
+            {
+                _endPanel[2].SetActive(true);
+            }
+            else if (_computer._nbPapers > 6)
+            {
+                _endPanel[3].SetActive(true);   
+            }
             Time.timeScale = 0;
         }
 

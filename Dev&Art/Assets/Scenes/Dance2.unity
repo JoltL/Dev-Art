@@ -2131,9 +2131,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 2a0b9164d64b65c4d8ff0345315300d9, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2176,6 +2176,8 @@ MonoBehaviour:
   - {fileID: 1717682717}
   - {fileID: 1882188205}
   _endPanel: {fileID: 251215758}
+  _eventSystem: {fileID: 1579333504}
+  _endButton: {fileID: 716316442}
 --- !u!95 &2119500746
 Animator:
   serializedVersion: 5

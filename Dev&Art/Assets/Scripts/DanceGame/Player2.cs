@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PlayerGame2 : MonoBehaviour
+public class Player2 : MonoBehaviour
 {
     [Header("RandomArrows")]
     // Ajouter les deux types d'entrées pour chaque direction
@@ -36,6 +36,8 @@ public class PlayerGame2 : MonoBehaviour
     [SerializeField] private GameObject[] _popmessage;
 
     [SerializeField] private GameObject _endPanel;
+
+    [SerializeField] private Sprite[] _imagedance;
 
     public EventSystem _eventSystem;
 
@@ -169,6 +171,7 @@ public class PlayerGame2 : MonoBehaviour
         if (key == KeyCode.UpArrow || key == KeyCode.JoystickButton3)
         {
             PlayAnimationByName("Up");
+            gameObject.GetComponent<Image>().sprite = _arrowSprite[0];
         }
         else if (key == KeyCode.DownArrow || key == KeyCode.JoystickButton0)
         {

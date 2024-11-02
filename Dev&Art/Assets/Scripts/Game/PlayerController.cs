@@ -153,12 +153,12 @@ public class PlayerController : MonoBehaviour
     // Do something after animation completes
     public void AnimationEntry_Complete(Spine.TrackEntry trackEntry)
     {
-       
+
         if (currentState.Equals("Wakeup"))
         {
             SetCharacterState(previousState);
         }
-        
+
         if (currentState.Equals("Hit"))
         {
             SetCharacterState(previousState);
@@ -175,27 +175,26 @@ public class PlayerController : MonoBehaviour
         {
             SetAnimation(code, true);
         }
+        else if (currentState.Equals("Hit"))
+        {
+            SetAnimation(hit, false);
+        }
         else if (state != currentState)
         {
-            if (state.Equals("Hit"))
+
+            if (state.Equals("Run"))
             {
-                SetAnimation(hit, true);
+                SetAnimation(run, true, 1.1f);
             }
-            else if (currentState != "Hit")
+            else if (state.Equals("Jump"))
             {
-                if (state.Equals("Run"))
-                {
-                    SetAnimation(run, true, 1.1f);
-                }
-                else if (state.Equals("Jump"))
-                {
-                    SetAnimation(jump, false);
-                }
-                else
-                {
-                    SetAnimation(idle, true);
-                }
+                SetAnimation(jump, false);
             }
+            else
+            {
+                SetAnimation(idle, true);
+            }
+
         }
         currentState = state;
     }

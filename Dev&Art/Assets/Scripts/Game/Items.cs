@@ -20,7 +20,8 @@ public class Items : MonoBehaviour
             _playerController = other.GetComponent<PlayerController>();
             other.GetComponent<PlayerController>()._score += _malus;
 
-            if(other.GetComponent<PlayerController>()._score < 1)
+            _playerController.SetCharacterState("Hit");
+            if (other.GetComponent<PlayerController>()._score < 1)
             {
                 other.GetComponent<PlayerController>()._score = 0;
             }
