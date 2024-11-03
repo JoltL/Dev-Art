@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     public string currentAnimation;
     public string previousState;
 
+    //Pour bouton wakeup
     public Animator _animator;
 
 

@@ -25,10 +25,7 @@ public class Items : MonoBehaviour
             _playerController.SetCharacterState("Hit");
 
             }
-            if (other.GetComponent<PlayerController>()._score < 1)
-            {
-                other.GetComponent<PlayerController>()._score = 0;
-            }
+           
 
             other.GetComponent<PlayerController>().UpdateText();
             Destroy(gameObject);

@@ -2215,8 +2215,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _score: 0
+  smoothSpeed: 5
   _slider: {fileID: 141427000}
-  _scoreText: {fileID: 286707019}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

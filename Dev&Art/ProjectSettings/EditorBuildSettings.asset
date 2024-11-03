@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dance1.unity
     guid: 54905f5e0779b5b44a19c8484dd892e7
+  - enabled: 1
+    path: Assets/Scenes/Dance2.unity
+    guid: 5b2c04839372a10478a523aa8a502346
   m_configObjects: {}
