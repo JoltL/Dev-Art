@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     public string currentAnimation;
     public string previousState;
 
+    public Animator _animator;
+
 
     private void Start()
     {
@@ -170,6 +172,8 @@ public class PlayerController : MonoBehaviour
         if (currentState.Equals("Wakeup"))
         {
             SetAnimation(wakeup, false);
+
+            _animator.SetTrigger("Wakeup");
         }
         else if (currentState.Equals("Code"))
         {

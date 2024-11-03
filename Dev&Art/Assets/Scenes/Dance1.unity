@@ -2178,7 +2178,7 @@ MonoBehaviour:
   _endPanel: {fileID: 251215758}
   _eventSystem: {fileID: 1579333504}
   _endButton: {fileID: 716316442}
-  _rightTime: 5
+  _rightTime: 0.6
 --- !u!95 &2119500746
 Animator:
   serializedVersion: 5

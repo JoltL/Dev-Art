@@ -11,7 +11,7 @@ public class Items : MonoBehaviour
 
     private void Update()
     {
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 15f);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -20,7 +20,11 @@ public class Items : MonoBehaviour
             _playerController = other.GetComponent<PlayerController>();
             other.GetComponent<PlayerController>()._score += _malus;
 
+            if(_malus < 0)
+            {
             _playerController.SetCharacterState("Hit");
+
+            }
             if (other.GetComponent<PlayerController>()._score < 1)
             {
                 other.GetComponent<PlayerController>()._score = 0;
