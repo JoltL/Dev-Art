@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text _chronoText;
 
     [SerializeField] private float _targetTime = 120f;
-    [SerializeField] private GameObject[] _endPanel;
+    public GameObject[] _endPanel;
 
     private Computer _computer;
 

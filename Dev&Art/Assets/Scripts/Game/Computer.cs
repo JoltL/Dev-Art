@@ -19,10 +19,11 @@ public class Computer : MonoBehaviour
 
     [SerializeField] private Slider _tapSlider;
 
+
     public void Coding()
     {
         print("coding");
-        if (_papers.Count >= 0)
+        if (_papers.Count > 1)
         {
             _nbPapers++;
             GameObject paperspawned = _papers[Random.Range(0, _papers.Count - 1)];
@@ -34,9 +35,10 @@ public class Computer : MonoBehaviour
         {
             Debug.Log("listevide");
             UIManager.Instance._isStarting = false;
-            _button.SetActive(true);
+            UIManager.Instance._endPanel[3].SetActive(true);
 
         }
+
     }
 
 

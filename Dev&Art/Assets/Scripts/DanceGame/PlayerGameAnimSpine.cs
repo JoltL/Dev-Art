@@ -58,7 +58,10 @@ public class PlayerGameAnimSpine : MonoBehaviour
 
     private void Start()
     {
-        _scoreGame2 = GetComponent<ScoreGame2>();
+
+        SetCharacterState("Idle");
+    
+    _scoreGame2 = GetComponent<ScoreGame2>();
         RandomArrowsSequence();
 
     }

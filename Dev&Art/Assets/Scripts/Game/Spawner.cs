@@ -94,7 +94,7 @@ public class Spawner : MonoBehaviour
         Vector3 posx = new Vector3(Random.Range(-7f, 7f), transform.position.y - 0.5f, transform.position.z);
         GameObject spawnedPaper = Instantiate(_paper[spawnedId], posx, Quaternion.identity);
 
-        float randomdrag = Random.Range(1f, 3f);
+        float randomdrag = Random.Range(1f, 2f);
         spawnedPaper.GetComponent<Rigidbody>().drag = randomdrag;
     }
 

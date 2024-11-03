@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
 
     public void UpdateText()
     {
-        _scoreText.text = _score.ToString() + "/5";
+        _scoreText.text = _score.ToString() + "/3";
     }
 
     private void OnCollisionEnter(Collision collision)

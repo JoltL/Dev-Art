@@ -3853,7 +3853,7 @@ MonoBehaviour:
   _jumpForce: 6
   _score: 0
   _scoreText: {fileID: 249709615}
-  _maxScore: 5
+  _maxScore: 3
   _canCode: 0
   _tapCount: 0
   _skeletonAnimation: {fileID: 1048520038}
@@ -7157,7 +7157,7 @@ MonoBehaviour:
   _isStarting: 0
   _pausePanel: {fileID: 184836218}
   _chronoText: {fileID: 1795160369}
-  _targetTime: 120
+  _targetTime: 140
   _endPanel:
   - {fileID: 1727290942}
   - {fileID: 1994107785}
@@ -7510,7 +7510,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1601205100
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16115,7 +16115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6087391702598001941, guid: 7d04ac6263b68264f9c09450bac941ef, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
