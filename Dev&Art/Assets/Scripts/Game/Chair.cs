@@ -25,6 +25,7 @@ public class Chair : MonoBehaviour
     {
         if(collision.gameObject.GetComponent<PlayerController>() != null)
         {
+            collision.gameObject.GetComponent<PlayerController>().SetCharacterState("Hit");
             collision.gameObject.GetComponent<PlayerController>()._score--;
             Destroy(gameObject);
         }

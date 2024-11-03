@@ -10,6 +10,7 @@ public class Computer : MonoBehaviour
     [Header("Paper")]
     [SerializeField] private int _idPaper;
     [SerializeField] private List<GameObject> _papers = new List<GameObject>();
+    public int _nbPapers;
 
     [Header("ButtonPlay")]
 
@@ -21,8 +22,9 @@ public class Computer : MonoBehaviour
     public void Coding()
     {
         print("coding");
-        if (_papers.Count > 0)
+        if (_papers.Count >= 0)
         {
+            _nbPapers++;
             GameObject paperspawned = _papers[Random.Range(0, _papers.Count - 1)];
             paperspawned.transform.gameObject.SetActive(true);
             _papers.Remove(paperspawned);
