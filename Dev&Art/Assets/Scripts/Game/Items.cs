@@ -29,6 +29,7 @@ public class Items : MonoBehaviour
 
             other.GetComponent<PlayerController>().UpdateText();
             Destroy(gameObject);
+            print(gameObject.name);
 
 
         }

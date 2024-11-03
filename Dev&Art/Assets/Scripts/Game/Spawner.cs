@@ -64,7 +64,7 @@ public class Spawner : MonoBehaviour
             _time += Time.deltaTime;
             if (_time >= _targetTime)
             {
-                int randomspawn = Random.Range(0, 5);
+                int randomspawn = Random.Range(0, 3);
                 for (int i = 0; i < randomspawn; i++)
                 {
                     Spawn();
@@ -81,20 +81,20 @@ public class Spawner : MonoBehaviour
         int dice = Random.Range(0, 100);
         int spawnedId = new int();
 
-        if(dice <= 50)
+        if(dice <= 70)
         {
             spawnedId = 0;
         }
-        else if (dice > 50 )
+        else if (dice > 70 )
         {
             spawnedId = Random.Range(1,3);
         }
 
         print(dice);
-        Vector3 posx = new Vector3(Random.Range(-8f, 8f), transform.position.y - 0.5f, transform.position.z);
+        Vector3 posx = new Vector3(Random.Range(-7f, 7f), transform.position.y - 0.5f, transform.position.z);
         GameObject spawnedPaper = Instantiate(_paper[spawnedId], posx, Quaternion.identity);
 
-        float randomdrag = Random.Range(0.1f, 3f);
+        float randomdrag = Random.Range(1f, 3f);
         spawnedPaper.GetComponent<Rigidbody>().drag = randomdrag;
     }
 

@@ -17,6 +17,7 @@ public class ScoreGame2 : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
         _game = GetComponent<PlayerGame2>();
     }
 
