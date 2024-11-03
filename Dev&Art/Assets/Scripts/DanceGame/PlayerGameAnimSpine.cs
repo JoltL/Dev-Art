@@ -84,8 +84,10 @@ public class PlayerGameAnimSpine : MonoBehaviour
                         Destroy(_instanciatedArrows[_currentIndex]);
                         _currentIndex++;
                         _scoreGame2._score++;
-                        _popmessage[0].SetActive(true);
-                        _popmessage[1].SetActive(false);
+                        //_popmessage[0].SetActive(true);
+                        //_popmessage[1].SetActive(false);
+
+                        StartCoroutine(Waitpop(_popmessage[0], _popmessage[1]));
 
                         if(_scoreGame2._score >= _sequenceNumber) 
                         {
@@ -109,12 +111,25 @@ public class PlayerGameAnimSpine : MonoBehaviour
                     {
                         PlayAnimationByName("Fail");
                         _scoreGame2._score--;
-                        _popmessage[0].SetActive(false);
-                        _popmessage[1].SetActive(true);
+                        //_popmessage[0].SetActive(false);
+                        //_popmessage[1].SetActive(true);
+
+                        StartCoroutine(Waitpop(_popmessage[1], _popmessage[0]));
                     }
                 }
             }
         }
+    }
+
+    IEnumerator Waitpop(GameObject pop, GameObject paspop)
+    {
+        pop.gameObject.SetActive(true);
+        paspop.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.5f);
+
+        pop.gameObject.SetActive(false);
+
     }
 
     void RandomArrowsSequence()
